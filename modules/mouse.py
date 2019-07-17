@@ -6,7 +6,7 @@ mouse = Controller()
 
 class MouseModule(BaseModule):
     def __init__(self):
-        pass
+        super().__init__(name='mouse')
 
     def update(self):
         return mouse.position
