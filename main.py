@@ -3,6 +3,7 @@ from threading import Thread
 from time import sleep
 from config import config
 
+
 def puller():
     from modules import to_load
 
