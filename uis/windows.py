@@ -1,5 +1,7 @@
 from pystray import Icon as icon, Menu as menu, MenuItem as item
 from PIL import Image
+from config import config
+
 state = False
 
 class State:
@@ -15,14 +17,14 @@ state = State()
 
 def on_clicked_mouse(icon, item):
     global state
-    print(str(state.mouse))
     state.mouse = not item.checked
+    config["mouse"] = state.mouse
 
 
 def on_clicked_keyboard(icon, item):
     global state
-    print(str(state.keyboard))
     state.keyboard = not item.checked
+    config["keyboard"] = state.keyboard
 
 
 # Update the state in `on_clicked` and return the new state in
