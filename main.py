@@ -23,7 +23,7 @@ puller_thread.start()
 system_type = system()
 info(f'Запущено на {system_type}')
 
-if system_type == 'Windows':
+if system_type == 'Darwin':
     from uis.mac import app
     app.run()
 else:
