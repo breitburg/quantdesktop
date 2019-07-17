@@ -11,5 +11,6 @@ from .mouse import MouseModule
 from .keyboard import KeyboardModule
 
 to_load = [
-    MouseModule()  # Модуль клавиатуры
+    MouseModule(),
+    KeyboardModule()
 ]

@@ -3,10 +3,14 @@ from pynput.keyboard import Listener
 from time import time, sleep
 from . import BaseModule
 
-key_events = []
+
 class KeyboardModule(BaseModule):
+    key_events = []
+
     def __init__(self):
         super().__init__(name='keyboard')
+        keys_thread = Thread(target=self.key_tracking, args=(self.key_events, ))
+        keys_thread.start()
 
     @staticmethod
     def key_tracking(key_events):
@@ -14,8 +18,5 @@ class KeyboardModule(BaseModule):
             listener.join()
 
     def update(self):
-        thread = Thread(target=self.key_tracking, args=(key_events, ))
-        thread.start()
-
-        print('Мы нажали ' + str(len(key_events)) + ' клавиш')
-        key_events.clear()
+        print('Мы нажали ' + str(len(self.key_events)) + ' клавиш')
+        self.key_events.clear()

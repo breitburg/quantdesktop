@@ -11,7 +11,7 @@ def on_clicked(icon, item):
 def run():
     # TODO: Решить проблемы с отметками
 
-    Icon('Quantify', Image.open('../assets/icon_win.png'), menu=Menu(
+    Icon('Quantify', Image.open('assets/icon_win.png'), menu=Menu(
         MenuItem(text='Мышь', action=on_clicked, checked=lambda x: config.get('mouse')),
         MenuItem(text='Клавиатура', action=on_clicked, checked=lambda x: config.get('keyboard'))
     )).run()
