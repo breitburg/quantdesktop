@@ -4,7 +4,7 @@ from config import config
 
 class StatusBarApp(App):
     def __init__(self):
-        super().__init__('Quantify', icon='assets/icon.png', quit_button='Выход')
+        super().__init__('Quantify', icon='assets/icon_mac.png', quit_button='Выход')
         self.menu = ['Мышь', 'Клавиатура']
 
     @clicked('Мышь')
