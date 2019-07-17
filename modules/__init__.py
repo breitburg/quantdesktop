@@ -1,4 +1,6 @@
 class BaseModule:
+    url = 'http://192.168.0.3:5000/data'
+
     def __init__(self, name):
         self.name = name
 
