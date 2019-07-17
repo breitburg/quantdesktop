@@ -3,33 +3,30 @@ from threading import Thread
 from time import sleep
 from config import config
 
+from logging import info, basicConfig, INFO
+basicConfig(level=INFO)
 
-def puller():
+
+def server_pull(is_alive):
     from modules import to_load
-    from requests import get
-
-    global is_alive
-    is_alive = True
 
     while is_alive:
         for item in to_load:
             if config.get(item.name):
-                values = item.update()
-                get('http://httpbin.org/get')
-                print(values)
-            sleep(1)
+                item.update()
+            sleep(10)
 
-
-puller_thread = Thread(target=puller, args=())
+is_alive = True
+puller_thread = Thread(target=server_pull, args=(is_alive, ))
 puller_thread.start()
 
-if system() == 'Darwin':
-    print('У нас мак')
+system_type = system()
+info(f'Запущено на {system_type}')
+
+if system_type == 'Darwin':
     from uis.mac import app
     app.run()
-    is_alive = False
 else:
-    print('У нас непонятная система')
     from uis.windows import run
     run()
-    is_alive = False
+is_alive = False

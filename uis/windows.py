@@ -1,43 +1,17 @@
-from pystray import Icon as icon, Menu as menu, MenuItem as item
-from PIL import Image
+from pystray import Icon, Menu, MenuItem
 from config import config
-
-state = False
-
-class State:
-    mouse = True
-    keyboard = True
-
-    def __init__(self):
-        return
+from PIL import Image
 
 
-state = State()
+def on_clicked(item):
+    title = 'mouse' if item.text == 'Мышь' else 'keyboard'
+    config.set_value(title, not config.get(title))
 
-
-def on_clicked_mouse(icon, item):
-    global state
-    state.mouse = not item.checked
-    config["mouse"] = state.mouse
-
-
-def on_clicked_keyboard(icon, item):
-    global state
-    state.keyboard = not item.checked
-    config["keyboard"] = state.keyboard
-
-image = Image.open("assets/icon_win.png")
 
 def run():
-    icon('Quantify', image, menu=menu(
-        item(
-            'Мышь',
-            on_clicked_mouse,
-            checked = lambda item: state.mouse
-        ),
-        item(
-            'Клавиатура',
-            on_clicked_keyboard,
-            checked=lambda item: state.keyboard
-        )
-        )).run()
+    # TODO: Решить проблемы с отметками
+
+    Icon('Quantify', Image.open('assets/icon_win.png'), menu=Menu(
+        MenuItem('Мышь', on_clicked, checked=lambda x: config.get('mouse')),
+        MenuItem('Клавиатура', on_clicked, checked=lambda x: config.get('keyboard'))
+    )).run()

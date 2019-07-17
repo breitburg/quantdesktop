@@ -6,5 +6,10 @@ class BaseModule:
         pass
 
 
+# Импорт модулей
 from .mouse import MouseModule
-to_load = [MouseModule()]
+from .keyboard import KeyboardModule
+
+to_load = [
+    MouseModule()  # Модуль клавиатуры
+]
