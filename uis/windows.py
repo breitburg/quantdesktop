@@ -1,14 +1,47 @@
-import pystray
-
-icon = pystray.Icon('test name')
-
-width = height = 16
-color1 = (0, 0, 0)
-color2 = (0, 255, 255)
+from pystray import Icon as icon, Menu as menu, MenuItem as item
 from PIL import Image
+state = False
 
-image = Image.open("../assets/icon.png")
+class State:
+    mouse = True
+    keyboard = True
 
-icon.icon = image
+    def __init__(self):
+        return
 
-icon.run()
+
+state = State()
+
+
+def on_clicked_mouse(icon, item):
+    global state
+    print(str(state.mouse))
+    state.mouse = not item.checked
+
+
+def on_clicked_keyboard(icon, item):
+    global state
+    print(str(state.keyboard))
+    state.keyboard = not item.checked
+
+
+# Update the state in `on_clicked` and return the new state in
+# a `checked` callable
+image = Image.open("../assets/icon_win.png")
+icon('test', image, menu=menu(
+    item(
+        'Mouse',
+        on_clicked_mouse,
+        checked = lambda item: state.mouse
+    ),
+    item(
+        'Keyboard',
+        on_clicked_keyboard,
+        checked=lambda item: state.keyboard
+    )
+    )).run()
+
+
+
+
+
