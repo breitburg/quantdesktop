@@ -24,15 +24,12 @@ puller_thread = Thread(target=puller, args=())
 puller_thread.start()
 
 if system() == 'Darwin':
-    print('У нас винда')
-    from uis.windows import run
-    run()
-    is_alive = False
-elif system() == 'Darwin':
     print('У нас мак')
     from uis.mac import app
     app.run()
     is_alive = False
 else:
-    print('Система не поддерживается')
+    print('У нас непонятная система')
+    from uis.windows import run
+    run()
     is_alive = False
