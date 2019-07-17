@@ -26,24 +26,18 @@ def on_clicked_keyboard(icon, item):
     state.keyboard = not item.checked
     config["keyboard"] = state.keyboard
 
+image = Image.open("assets/icon_win.png")
 
-# Update the state in `on_clicked` and return the new state in
-# a `checked` callable
-image = Image.open("../assets/icon_win.png")
-icon('test', image, menu=menu(
-    item(
-        'Mouse',
-        on_clicked_mouse,
-        checked = lambda item: state.mouse
-    ),
-    item(
-        'Keyboard',
-        on_clicked_keyboard,
-        checked=lambda item: state.keyboard
-    )
-    )).run()
-
-
-
-
-
+def run():
+    icon('Quantify', image, menu=menu(
+        item(
+            'Мышь',
+            on_clicked_mouse,
+            checked = lambda item: state.mouse
+        ),
+        item(
+            'Клавиатура',
+            on_clicked_keyboard,
+            checked=lambda item: state.keyboard
+        )
+        )).run()

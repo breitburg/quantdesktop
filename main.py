@@ -6,21 +6,27 @@ from config import config
 
 def puller():
     from modules import to_load
+    from requests import get
 
     global is_alive
     is_alive = True
 
     while is_alive:
         for item in to_load:
-            if config[item.name]: print(item.update())
+            if config[item.name]:
+                values = item.update()
+                get('http://httpbin.org/get')
+                print(values)
             sleep(1)
 
 
 puller_thread = Thread(target=puller, args=())
 puller_thread.start()
 
-if system() == 'Windows':
+if system() == 'Darwin':
     print('У нас винда')
+    from uis.windows import run
+    run()
     is_alive = False
 elif system() == 'Darwin':
     print('У нас мак')
