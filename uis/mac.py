@@ -13,11 +13,12 @@ class StatusBarApp(App):
     @clicked('Мышь')
     def mouse(self, sender):
         sender.state = not sender.state
-        config['mouse'] = sender.state
+        config.set_value('mouse', sender.state)
 
     @clicked('Клавиатура')
     def keyboard(self, sender):
         sender.state = not sender.state
-        config['keyboard'] = sender.state
+        config.set_value('keyboard', sender.state)
+
 
 app = StatusBarApp()

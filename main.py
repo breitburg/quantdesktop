@@ -13,7 +13,7 @@ def puller():
 
     while is_alive:
         for item in to_load:
-            if config[item.name]:
+            if config.get(item.name):
                 values = item.update()
                 get('http://httpbin.org/get')
                 print(values)
