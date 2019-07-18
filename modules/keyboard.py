@@ -14,7 +14,6 @@ class KeyboardModule(BaseModule):
 
         # Создаем поток для трекинга нажатий на клавиатуру
         # передаем в функцию массив нажатых клавиш
-        # TODO: Решить проблему с
         keys_thread = Thread(target=self.key_tracking, args=(self.key_events, ))
         keys_thread.start()
 

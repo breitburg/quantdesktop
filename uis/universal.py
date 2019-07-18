@@ -11,7 +11,8 @@ def on_clicked(icon, item):
 
 
 # Создаем инстанс приложения
-app = Icon('Quantify', Image.open('assets/icon_win.png' if system() == 'Darwin' else '../assets/icon_win.png'), menu=Menu(
+app = Icon('Quantify', Image.open(
+    'assets/icon_win.png' if system() == 'Darwin' or system() == 'Linux' else '../assets/icon_win.png'), menu=Menu(
         MenuItem(text='Мышь', action=on_clicked, checked=lambda x: config.get_value('mouse')),
         MenuItem(text='Клавиатура', action=on_clicked, checked=lambda x: config.get_value('keyboard'))
     ))
