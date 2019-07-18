@@ -44,8 +44,7 @@ if __name__ == '__main__':
 
     # В зависимости от системы запускаем разные
     # реализации тулбар меню
-    if system_type == 'Darwin': from uis.mac import app
-    else: from uis.universal import app
+    from uis.universal import app
     app.run()
 
     # После завершения работы тулбар
