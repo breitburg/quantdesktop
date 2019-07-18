@@ -4,6 +4,19 @@
 
 Репозиторий содержащий приложение, которое отправляет данные о пользователе на сервер для анализа.
 
+## Сборка
+
+1. Установить `pyinstaller` и `pypiwin32`:
+```console
+pip install pyinstaller
+pip install pypiwin32
+```
+
+2. Запустить сборку
+```console
+pyinstaller --name "Desktop Client" --add-data "desktop\assets;assets" desktop\__main__.py
+```
+
 ## Заметки
 
 1. Для работы на macOS нужно установить `rumps`:
