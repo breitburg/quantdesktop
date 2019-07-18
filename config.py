@@ -1,14 +1,19 @@
 class Config:
+    # Параметры которые мы будем изменять
     properties = {
         'keyboard': True,
         'mouse': True
     }
 
-    def set_value(self, title: str, value: bool) -> None:
+    # Метод для утановки значения
+    def set_value(self, title: str, value: bool):
         self.properties[title] = value
 
-    def get(self, title: str) -> bool:
+    # Метод получения значения
+    def get_value(self, title: str):
         assert title in self.properties
         return self.properties[title]
 
+
+# Создаем инстанс конфига
 config = Config()

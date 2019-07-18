@@ -1,3 +1,6 @@
+# Реализация для macOS
+# TODO: Перейти на универсальную реализацию
+
 from rumps import App, clicked
 from config import config
 
@@ -8,6 +11,7 @@ class StatusBarApp(App):
         self.menu = ['Мышь', 'Клавиатура']
 
         for item in self.menu.items():
+            # Ставим значение всех чекбоксов на True
             item[1].state = 1
 
     @clicked('Мышь')
@@ -21,4 +25,5 @@ class StatusBarApp(App):
         config.set_value('keyboard', sender.state)
 
 
+# Создаем инстанс приложения
 app = StatusBarApp()
