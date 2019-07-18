@@ -1,4 +1,8 @@
 from setuptools import setup, find_packages
+from sys import argv
+
+if argv[len(argv) - 1] != 'install':
+    print('ahhsa')
 
 setup(
     name='quantify-desktop',
@@ -13,3 +17,4 @@ setup(
         'pillow'
       ],
 )
+
