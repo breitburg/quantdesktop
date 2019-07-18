@@ -1,11 +1,11 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='quantify-desktop',
-    version='1.0',
+    version='1.0.7',
     description='Слежка за пользователями с их согласия',
-    long_description=open('readme.md').read(),
-    packages=['desktop'],
+    packages=find_packages(),
+    include_package_data=True,
     install_requires=[
         'requests',
         'pynput',
