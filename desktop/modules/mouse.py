@@ -4,6 +4,7 @@ from logging import info
 from requests import post
 from time import time, sleep
 from threading import Thread
+from ..extras.id import generate_id
 
 # Создаем контроллер мыши
 from pynput.mouse import Controller
@@ -24,7 +25,7 @@ class MouseModule(BaseModule):
     def update(self):
         # Метод получения и отправки данных на сервер
         try:
-            post(self.url, json=dict(id_device=0, source=100, value=self.move_events))
+            post(self.url, json=dict(id_device=generate_id(), source=100, value=self.move_events))
             info(f'Отправлены данные: {self.move_events}')
             self.move_events.clear()
         except Exception as exception:

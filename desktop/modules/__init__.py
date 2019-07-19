@@ -1,5 +1,5 @@
 from platform import system
-
+__all__ = ['keyboard', 'mouse']
 
 class BaseModule:
     """Материнский класс для написания модулей"""
