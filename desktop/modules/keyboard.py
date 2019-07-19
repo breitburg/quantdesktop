@@ -13,9 +13,6 @@ class KeyboardModule(BaseModule):
         keys_thread = Thread(target=key_tracking, args=(self.events, ))
         keys_thread.start()
 
-    def update(self):
-        return self.events
-
 
 def key_tracking(key_events):
     # Метод обрабатывающий нажатие клавиш

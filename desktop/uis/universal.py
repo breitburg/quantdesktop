@@ -12,7 +12,7 @@ def on_clicked(icon, item):
 
 # Создаем инстанс приложения
 from os.path import join, abspath
-from os import getcwd
+from os import getcwd, _exit
 app = Icon('Quantify', Image.open(
     join(getcwd() if system() == 'Windows' else abspath(__file__).replace(join('uis', 'universal.py'), ''), 'assets', 'toolbar_icon.png')), menu=Menu(
         MenuItem(text='Мышь', action=on_clicked, checked=lambda x: config.get_value('mouse')),

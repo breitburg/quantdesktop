@@ -19,9 +19,6 @@ class MouseModule(BaseModule):
         clicks_thread = Thread(target=move_event, args=(self.events, ))
         clicks_thread.start()
 
-    def update(self):
-        return self.events
-
 
 def move_event(key_events):
     while True:
