@@ -34,5 +34,8 @@ class MouseModule(BaseModule):
 def move_event(key_events):
     while True:
         values = mouse.position
-        key_events.append(dict(x=values[0], y=values[1], time=time()))
-        sleep(2)
+
+        # Если данные такие-же добавляем только один блок данных
+        if (len(key_events) > 0 and key_events[-1]['x'] != values[0] and key_events[-1]['y'] != values[1]) or len(key_events) == 0:
+            key_events.append(dict(x=values[0], y=values[1], time=time()))
+        sleep(1)
