@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='quantify-desktop',
-    version='1.0.10',
+    version='1.0.11',
     description='Слежка за пользователями с их согласия',
     packages=find_packages(),
     include_package_data=True,

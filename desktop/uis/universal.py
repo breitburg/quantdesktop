@@ -3,6 +3,7 @@ from desktop.config import config
 from PIL import Image
 from platform import system
 
+
 def on_clicked(icon, item):
     # Обработка нажатия на чекбокс
     title = 'mouse' if item.text == 'Мышь' else 'keyboard'

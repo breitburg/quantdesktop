@@ -1,8 +1,9 @@
 from platform import system
 
+
 class BaseModule:
     """Материнский класс для написания модулей"""
-    url = 'http://192.168.0.3:8001/data'  # URL для отправки данных
+    url = 'http://195.201.111.238:8001/data'  # URL для отправки данных
 
     def __init__(self, name):
         self.name = name
