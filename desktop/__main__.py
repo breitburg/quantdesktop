@@ -2,7 +2,9 @@ from platform import system
 from threading import Thread
 from time import sleep
 from desktop.config import config
-
+from requests import post
+from config import url
+from extras.id import generate_id
 from logging import info, basicConfig, INFO
 
 # Установка уровня сообщений при котором
@@ -20,7 +22,20 @@ def server_pull(is_alive, to_load):
         for item in to_load:
             if config.get_value(item.name):
                 info(f'Обновляем данные для {item.name}')
-                item.update()  # вызываем update
+                value = item.update()  # вызываем update
+                info(f'Собрано {len(value)} блоков данных!')
+                try:
+                    ready_to_send = value.copy()
+
+                    if len(ready_to_send) > 50:
+                        ready_to_send = ready_to_send[:50]
+                        del item.events[:50]
+                    post(url, json=dict(id_device=generate_id(), source=item.source, value=ready_to_send))
+
+                    info(f'Отправлены данные ({len(ready_to_send)}): {ready_to_send}')
+                    item.events.clear()
+                except Exception as exception:
+                    info(f'Возникла проблема при подключению: {exception}')
         info('Ожидание...')
         sleep(10)
 

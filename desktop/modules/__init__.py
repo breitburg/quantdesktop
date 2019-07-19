@@ -1,12 +1,13 @@
 from platform import system
 __all__ = ['keyboard', 'mouse']
 
+
 class BaseModule:
     """Материнский класс для написания модулей"""
-    url = 'http://195.201.111.238:8001/data'  # URL для отправки данных
-
-    def __init__(self, name):
+    def __init__(self, name, source):
         self.name = name
+        self.source = source
+        self.events = list()
 
     def update(self):
         # Метод который выполняет функцию получения,

