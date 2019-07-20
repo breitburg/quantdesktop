@@ -16,6 +16,6 @@ from os import getcwd
 app = Icon('Quantify', Image.open(
     join(getcwd() if system() == 'Windows' else abspath(__file__).replace(join('uis', 'universal.py'), ''), 'assets', 'toolbar_icon.png')), menu=Menu(
         MenuItem(text='Мышь', action=on_clicked, checked=lambda x: config.get_value('mouse')),
-        MenuItem(text='Клавиатура', action=on_clicked, checked=lambda x: config.get_value('keyboard'), enabled=system() != 'Darwin'),
+        MenuItem(text='Клавиатура', action=on_clicked, checked=lambda x: config.get_value('keyboard') if system() != 'Darwin' else False, enabled=system() != 'Darwin'),
         MenuItem(text='Процессы', action=on_clicked, checked=lambda x: config.get_value('processes'))
     ))
