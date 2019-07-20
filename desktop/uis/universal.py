@@ -19,8 +19,9 @@ def get_auth_code():
     from ..config import url_endpoint
     from ..extras.id import generate_id
     from platform import uname
-    code = get(f'{url_endpoint}2fa?id_device="{generate_id()}"&name={uname().node}').json()['code']
-    messagebox.showinfo('Код 2FA', f'Ваш код: {code}')
+    responce = get(f'{url_endpoint}2fa?id_device={generate_id()}&name={uname().node}').json()
+    messagebox.showinfo('Просмотр кода', f'Ваш код: {responce["code"]}\n'
+                       f'Код остается валидным только 10 минут.')
 
 
 # Создаем инстанс приложения
