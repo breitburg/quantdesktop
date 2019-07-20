@@ -14,7 +14,7 @@ pip install pypiwin32
 
 2. Запустить сборку
 ```console
-pyinstaller --name "Desktop Client" --add-data "desktop\assets;assets" desktop\__main__.py
+pyinstaller --noconsole --name "Desktop Client" --add-data "desktop\assets;assets" desktop\__main__.py
 ```
 
 ## Заметки
