@@ -1,5 +1,5 @@
 from sys import argv
-__version__ = '1.0.11'
+__version__ = '1.0.12'
 
 if len(argv) != 1:
     from setuptools import setup, find_packages
