@@ -3,8 +3,8 @@ from threading import Thread
 from time import sleep
 from desktop.config import config
 from requests import post
-from config import url_endpoint
-from extras.id import generate_id
+from desktop.config import url_endpoint
+from desktop.extras.id import generate_id
 from logging import info, basicConfig, INFO
 
 # Установка уровня сообщений при котором
