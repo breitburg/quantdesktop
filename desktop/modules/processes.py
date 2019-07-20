@@ -13,7 +13,9 @@ class ProcessesModule(BaseModule):
 
     def update(self):
         for proc in process_iter():
-            block = proc.as_dict(attrs=['name', 'create_time'])
+            block = proc.as_dict(attrs=['name', 'memory_percent', 'username', 'create_time'])
+            if type(block['memory_percent']) != float: continue
             block['time'] = time()
             self.events.append(block)
-        return self.events
+        self.events = sorted(self.events, key=lambda i: i['memory_percent'])
+        return self.events[-50:]

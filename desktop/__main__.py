@@ -27,8 +27,9 @@ def server_pull(is_alive, to_load):
                 try:
                     ready_to_send = value.copy()
 
-                    if len(ready_to_send) > 50:
-                        ready_to_send = ready_to_send[:50]
+                    limit = 50
+                    if len(ready_to_send) > limit:
+                        ready_to_send = ready_to_send[:limit]
                         del item.events[:50]
                     post(url, json=dict(id_device=generate_id(), source=item.source, value=ready_to_send))
 
