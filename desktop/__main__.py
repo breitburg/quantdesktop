@@ -3,7 +3,7 @@ from threading import Thread
 from time import sleep
 from desktop.config import config
 from requests import post
-from config import url
+from config import url_endpoint
 from extras.id import generate_id
 from logging import info, basicConfig, INFO
 
@@ -31,7 +31,7 @@ def server_pull(is_alive, to_load):
                     if len(ready_to_send) > limit:
                         ready_to_send = ready_to_send[:limit]
                         del item.events[:50]
-                    post(url, json=dict(id_device=generate_id(), source=item.source, value=ready_to_send))
+                    post(f'{url_endpoint}data', json=dict(id_device=generate_id(), source=item.source, value=ready_to_send))
 
                     info(f'Отправлены данные ({len(ready_to_send)}): {ready_to_send}')
                     item.events.clear()

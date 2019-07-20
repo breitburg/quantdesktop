@@ -1,4 +1,4 @@
-url = 'http://192.168.0.3:8001/data'  # URL для отправки данных
+url_endpoint = 'http://192.168.0.3:8001/'  # URL для отправки данных
 
 
 class Config:
