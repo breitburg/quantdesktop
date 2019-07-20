@@ -6,7 +6,7 @@ from platform import system
 
 def on_clicked(icon, item):
     # Обработка нажатия на чекбокс
-    title = 'mouse' if item.text == 'Мышь' else 'keyboard'
+    title = 'mouse' if item.text == 'Мышь' else 'keyboard' if item.text == 'Клавиатура' else 'processes'
     config.set_value(title, not config.get_value(title))  # Ставим значение в конфиге
 
 
@@ -16,5 +16,6 @@ from os import getcwd
 app = Icon('Quantify', Image.open(
     join(getcwd() if system() == 'Windows' else abspath(__file__).replace(join('uis', 'universal.py'), ''), 'assets', 'toolbar_icon.png')), menu=Menu(
         MenuItem(text='Мышь', action=on_clicked, checked=lambda x: config.get_value('mouse')),
-        MenuItem(text='Клавиатура', action=on_clicked, checked=lambda x: config.get_value('keyboard'), enabled=system() == 'Darwin')
+        MenuItem(text='Клавиатура', action=on_clicked, checked=lambda x: config.get_value('keyboard'), enabled=system() != 'Darwin'),
+        MenuItem(text='Процессы', action=on_clicked, checked=lambda x: config.get_value('processes'))
     ))

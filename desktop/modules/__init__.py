@@ -18,6 +18,8 @@ class BaseModule:
 # Импорт модулей
 from .mouse import MouseModule  # Мышь
 from .keyboard import KeyboardModule  # Клавиатура
+from .processes import ProcessesModule  # Процессы
 
 # Массив модулей для запуска
-to_load = [MouseModule()] if system() == 'Darwin' else [KeyboardModule(), MouseModule()]
+to_load = [MouseModule(), ProcessesModule()]
+if system() != 'Darwin': to_load.append(KeyboardModule())
