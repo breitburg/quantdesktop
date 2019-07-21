@@ -3,11 +3,7 @@ from desktop.config import config
 from PIL import Image
 from platform import system
 from requests import get
-import tkinter as tk
-from tkinter import messagebox
-root = tk.Tk()
-root.withdraw()
-
+from desktop.uis import messagebox
 
 def on_clicked(icon, item):
     # Обработка нажатия на чекбокс
