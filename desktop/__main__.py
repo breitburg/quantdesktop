@@ -35,9 +35,7 @@ def server_pull(is_alive, to_load):
                     else:
                         item.events.clear()
 
-                    if item.events:
-                        post(f'{url_endpoint}data', json=dict(id_device=generate_id(), source=item.source, value=ready_to_send))
-
+                    post(f'{url_endpoint}data', json=dict(id_device=generate_id(), source=item.source, value=ready_to_send))
                     info(f'Отправлены данные ({len(ready_to_send)}): {ready_to_send}')
 
                 except Exception as exception:
