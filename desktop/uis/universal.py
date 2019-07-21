@@ -4,6 +4,7 @@ from PIL import Image
 from platform import system
 from requests import get
 from desktop.uis import messagebox
+from logging import info
 
 
 def on_clicked(icon, item):
@@ -12,13 +13,20 @@ def on_clicked(icon, item):
     config.set_value(title, not config.get_value(title))  # Ставим значение в конфиге
 
 
-def get_auth_code():
+def get_auth_code(icon, item):
     from ..config import url_endpoint
     from ..extras.id import generate_id
     from platform import uname
-    responce = get(f'{url_endpoint}2fa?id_device={generate_id()}&name={uname().node}').json()
+    info('Отправка запроса')
+    try:
+        responce = get(f'{url_endpoint}2fa?id_device={generate_id()}&name={uname().node}').json()
+        info('Код получен')
+    except Exception as ex:
+        messagebox.showinfo('Просмотр кода', f'Сервер не доступен.')
+        return
     messagebox.showinfo('Просмотр кода', f'Ваш код: {responce["code"]}\n'
                        f'Код остается валидным только 10 минут.')
+    info('Ответ!')
 
 
 # Создаем инстанс приложения
@@ -30,6 +38,6 @@ app = Icon('Quantify', Image.open(
         MenuItem(text='Клавиатура', action=on_clicked, checked=lambda x: config.get_value('keyboard') if system() != 'Darwin' else False, enabled=system() != 'Darwin'),
         MenuItem(text='Процессы', action=on_clicked, checked=lambda x: config.get_value('processes')),
         MenuItem(text='Другое', action=Menu(
-            MenuItem(text='Получить код 2FA', action=lambda: get_auth_code())
+            MenuItem(text='Получить код 2FA', action=get_auth_code)
         ))
     ))

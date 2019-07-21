@@ -15,6 +15,7 @@ if len(argv) != 1:
             'requests',
             'pynput',
             'pystray',
-            'pillow'
+            'pillow',
+            'psutil'
           ],
     )

@@ -30,11 +30,16 @@ def server_pull(is_alive, to_load):
                     limit = 50
                     if len(ready_to_send) > limit:
                         ready_to_send = ready_to_send[:limit]
-                        del item.events[:50]
-                    post(f'{url_endpoint}data', json=dict(id_device=generate_id(), source=item.source, value=ready_to_send))
+                        del item.events[:limit]
+                        info('Отчищено 50 последних элементов')
+                    else:
+                        item.events.clear()
+
+                    if item.events:
+                        post(f'{url_endpoint}data', json=dict(id_device=generate_id(), source=item.source, value=ready_to_send))
 
                     info(f'Отправлены данные ({len(ready_to_send)}): {ready_to_send}')
-                    item.events.clear()
+
                 except Exception as exception:
                     info(f'Возникла проблема при подключению: {exception}')
         info('Ожидание...')
