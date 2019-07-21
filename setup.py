@@ -1,5 +1,5 @@
 from sys import argv
-__version__ = '1.0.13'
+from desktop.config import __version__
 
 if len(argv) != 1:
     from setuptools import setup, find_packages

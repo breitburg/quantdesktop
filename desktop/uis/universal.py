@@ -5,6 +5,7 @@ from platform import system
 from requests import get
 from desktop.uis import messagebox
 
+
 def on_clicked(icon, item):
     # Обработка нажатия на чекбокс
     title = 'mouse' if item.text == 'Мышь' else 'keyboard' if item.text == 'Клавиатура' else 'processes'

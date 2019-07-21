@@ -48,9 +48,9 @@ if __name__ == '__main__':
     # в отдельном потоке
     is_alive = True
 
+    info('Проверка обновлений...')
     from desktop.updates import check_updates
     check_updates()
-
 
     # Поток для фоновой обновления и отправки данных
     # модулей на сервер
