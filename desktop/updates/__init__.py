@@ -18,9 +18,8 @@ def check_new():
 
 
 def check_updates():
-    while True:
-        if not check_new(): break
-        info(f'Обновление! ({release.tag_name})')
+    if check_new():
+        info(f'Обновление! ({release["tag_name"]})')
         assets = release['assets']
         url = assets[0]['browser_download_url']
 
@@ -28,4 +27,6 @@ def check_updates():
         f'Хотите скачать обновление?', icon='warning')
         if result == 'yes':
             openurl(url=url)
-            quit()
+
+            from sys import exit
+            exit()
