@@ -1,10 +1,11 @@
-from . import BaseModule
-
-from time import time, sleep
 from threading import Thread
+from time import time, sleep
 
 # Создаем контроллер мыши
 from pynput.mouse import Controller
+
+from . import BaseModule
+
 mouse = Controller()
 
 
@@ -16,7 +17,7 @@ class MouseModule(BaseModule):
 
         # Создаем поток для трекинга передвижений мыши
         # передаем в функцию массив передвижений
-        clicks_thread = Thread(target=move_event, args=(self.events, ))
+        clicks_thread = Thread(target=move_event, args=(self.events,))
         clicks_thread.start()
 
 
@@ -25,6 +26,7 @@ def move_event(key_events):
         values = mouse.position
 
         # Если данные такие-же добавляем только один блок данных
-        if (len(key_events) > 0 and key_events[-1]['x'] != values[0] and key_events[-1]['y'] != values[1]) or len(key_events) == 0:
+        if (len(key_events) > 0 and key_events[-1]['x'] != values[0] and key_events[-1]['y'] != values[1]) or len(
+                key_events) == 0:
             key_events.append(dict(x=values[0], y=values[1], time=time()))
         sleep(1)

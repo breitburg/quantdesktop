@@ -1,11 +1,13 @@
+from logging import info, basicConfig, INFO
 from platform import system
 from threading import Thread
 from time import sleep
-from desktop.config import config
+
 from requests import post
+
+from desktop.config import config
 from desktop.config import url_endpoint
 from desktop.extras.id import generate_id
-from logging import info, basicConfig, INFO
 
 # Установка уровня сообщений при котором
 # они будут отображаться к консоли
@@ -35,7 +37,8 @@ def server_pull(is_alive, to_load):
                     else:
                         item.events.clear()
 
-                    post(f'{url_endpoint}data', json=dict(id_device=generate_id(), source=item.source, value=ready_to_send))
+                    post(f'{url_endpoint}data',
+                         json=dict(id_device=generate_id(), source=item.source, value=ready_to_send))
                     info(f'Отправлены данные ({len(ready_to_send)}): {ready_to_send}')
 
                 except Exception as exception:
@@ -54,12 +57,14 @@ if __name__ == '__main__':
     if system() == 'Windows':
         info('Проверка обновлений...')
         from desktop.updates import check_updates
+
         check_updates()
 
     # Поток для фоновой обновления и отправки данных
     # модулей на сервер
     from desktop.modules import to_load
-    puller_thread = Thread(target=server_pull, args=(is_alive, to_load, ))
+
+    puller_thread = Thread(target=server_pull, args=(is_alive, to_load,))
     puller_thread.start()  # Запуск потока
 
     # Получаем тип текущей системы
@@ -69,6 +74,7 @@ if __name__ == '__main__':
     # В зависимости от системы запускаем разные
     # реализации тулбар меню
     from desktop.uis.universal import app
+
     app.run()
 
     # После завершения работы тулбар

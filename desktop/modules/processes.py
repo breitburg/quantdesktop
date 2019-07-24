@@ -1,9 +1,11 @@
-from . import BaseModule
-from psutil import process_iter
 from time import time
 
+from psutil import process_iter
 # Создаем контроллер мыши
 from pynput.mouse import Controller
+
+from . import BaseModule
+
 mouse = Controller()
 
 
